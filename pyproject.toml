@@ -16,7 +16,7 @@ black = "^21.12b0"
 isort = "^5.10.1"
 
 [tool.black]
-line-length = 79
+line-length = 80
 skip-string-normalization = true
 
 [build-system]
