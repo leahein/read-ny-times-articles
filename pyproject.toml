@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "nyt_paywall"
+name = "read_ny_times_articles"
 version = "0.1.0"
 description = ""
 authors = ["Leah"]
