@@ -4,9 +4,9 @@ import sys
 import tempfile
 import webbrowser
 
-from bs4 import BeautifulSoup # type: ignore
-from bs4.element import Tag # type: ignore
-import requests # type: ignore
+import requests  # type: ignore
+from bs4 import BeautifulSoup  # type: ignore
+from bs4.element import Tag  # type: ignore
 
 BASIC_STYLING = '''
 <style>
@@ -71,25 +71,23 @@ def render_file(title: Tag, text: Tag):
         webbrowser.open(filename)
 
 
-def get_article(url: str) -> str:
-    '''Get a NYT article'''
-    resp = requests.get(url)
-    resp.raise_for_status()
-    return resp.text
-
-
 def parse_article(article: str) -> tuple[Tag, Tag]:
     '''Parse the given NYT article for the title and relevant text'''
 
     html = BeautifulSoup(article, 'html.parser')
 
     body: Tag = html.find(attrs={'name': 'articleBody'})
-    content: list[Tag] = body.find_all(
-        'div', class_='StoryBodyCompanionColumn'
-    )
+    content: list[Tag] = body.find_all('div', class_='StoryBodyCompanionColumn')
     content_str = '\n'.join(str(section) for section in content)
 
     return html.title, content_str
+
+
+def get_article(url: str) -> str:
+    '''Get a NYT article'''
+    resp = requests.get(url)
+    resp.raise_for_status()
+    return resp.text
 
 
 def main(url: str):
@@ -103,7 +101,7 @@ def main(url: str):
 
 if __name__ == '__main__':
     try:
-        [_, url_] = sys.argv # pylint: disable=unbalanced-tuple-unpacking
+        [_, url_] = sys.argv  # pylint: disable=unbalanced-tuple-unpacking
     except ValueError:
         print('Please pass in the URL of the NYT article')
         raise
