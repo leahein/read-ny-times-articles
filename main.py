@@ -85,7 +85,7 @@ def parse_article(article: str) -> tuple[Tag, Tag]:
 
 def get_article(url: str) -> str:
     '''Get a NYT article'''
-    resp = requests.get(url)
+    resp = requests.get(url, headers={'User-Agent': 'curl/7.83.1'})
     resp.raise_for_status()
     return resp.text
 
